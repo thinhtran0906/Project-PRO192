@@ -109,4 +109,8 @@ public abstract class Player {
         );
     }
     public abstract double calculateSalary();
+
+    public double calculateBonus(int performancePoints) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

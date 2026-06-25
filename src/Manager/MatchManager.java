@@ -1,8 +1,9 @@
 
 package Manager;
 
+import Entities.MatchRecord;
+import Entities.Player;
 import java.util.ArrayList;
-import Model.MatchRecord;
 
 public class MatchManager {
 

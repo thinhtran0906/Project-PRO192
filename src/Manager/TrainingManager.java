@@ -1,3 +1,4 @@
+import Entities.TrainingSession;
 import java.util.ArrayList;
 
 public class TrainingManager {
