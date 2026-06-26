@@ -1,33 +1,17 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class SalaryManager {
-    ArrayList<Double> salaries = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-
-    public void addSalary() {
-        System.out.print("Enter salary: ");
-        salaries.add(sc.nextDouble());
+    public double calculateMonthlySalary(double baseSalary) {
+        return baseSalary;
+    }
+    public double calculatePerformanceBonus(double baseSalary, double bonusRate) {
+        return baseSalary * bonusRate;
     }
 
-    public void displaySalaries() {
-        for (int i = 0; i < salaries.size(); i++) {
-            System.out.println("Salary " + i + ": " + salaries.get(i));
+    
+     public boolean validateSalaryRules(double baseSalary) {
+        if (baseSalary > 0) {
+            return true;
+        } else {
+            return false;
         }
-    }
-
-    public void updateSalary() {
-        System.out.print("Enter position: ");
-        int i = sc.nextInt();
-
-        System.out.print("Enter new salary: ");
-        salaries.set(i, sc.nextDouble());
-    }
-
-    public void deactivateSalary() {
-        System.out.print("Enter position: ");
-        int i = sc.nextInt();
-
-        salaries.set(i, 0.0);
     }
 }
