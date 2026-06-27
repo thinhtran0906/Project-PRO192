@@ -1,5 +1,6 @@
 package Manager;
 
+import Entities.TrainingSession;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
