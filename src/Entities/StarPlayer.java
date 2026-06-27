@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entities;
 
-/**
- *
- * @author Admin
- */
-public class StarPlayer extends Player{
-     private double bonus;
+public class StarPlayer extends Player {
+
+    private double bonus;
 
     public double getBonus() {
         return bonus;
@@ -22,5 +15,16 @@ public class StarPlayer extends Player{
     @Override
     public double calculateSalary() {
         return getBaseSalary() + bonus;
+    }
+
+    // BR26: Star Player bonus = Monthly Performance Points x 500,000 VND.
+    @Override
+    public double calculateBonus(int monthlyPerformancePoints) {
+        return monthlyPerformancePoints * 500000.0;
+    }
+
+    @Override
+    public String getPlayerType() {
+        return "Star Player";
     }
 }

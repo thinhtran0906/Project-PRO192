@@ -1,12 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Entities;
 
-public class RegularPlayer extends Player{
+public class RegularPlayer extends Player {
+
     @Override
     public double calculateSalary() {
         return getBaseSalary();
+    }
+
+    // BR26: Regular Player bonus = 0 VND.
+    @Override
+    public double calculateBonus(int monthlyPerformancePoints) {
+        return 0;
+    }
+
+    @Override
+    public String getPlayerType() {
+        return "Regular Player";
     }
 }

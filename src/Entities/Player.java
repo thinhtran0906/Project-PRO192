@@ -110,7 +110,14 @@ public abstract class Player {
     }
     public abstract double calculateSalary();
 
-    public double calculateBonus(int performancePoints) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // Polymorphic monthly performance bonus (BR26).
+    public abstract double calculateBonus(int monthlyPerformancePoints);
+
+    // BR27: Total Monthly Salary = Base Salary + Monthly Performance Bonus.
+    public double calculateMonthlySalary(int monthlyPerformancePoints) {
+        return baseSalary + calculateBonus(monthlyPerformancePoints);
     }
+
+    // Label used in reports ("Regular Player" / "Star Player").
+    public abstract String getPlayerType();
 }
