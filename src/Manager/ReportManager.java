@@ -14,11 +14,13 @@ public class ReportManager {
 
     private PlayerManager playerManager;
     private MatchManager matchManager;
+    private SalaryManager salaryManager;
     private Scanner sc;
 
-    public ReportManager(PlayerManager playerManager, MatchManager matchManager, Scanner sc) {
+    public ReportManager(PlayerManager playerManager, MatchManager matchManager,SalaryManager salaryManager, Scanner sc) {
         this.playerManager = playerManager;
         this.matchManager = matchManager;
+        this.salaryManager = salaryManager;
         this.sc = sc;
     }
 
@@ -44,8 +46,11 @@ public class ReportManager {
             double totalCost = 0;
             for (Player p : players) {
                 int points = matchManager.getMonthlyPerformancePoints(p.getPlayerID(), month, year);
-                double bonus = p.calculateBonus(points);
-                double total = p.getBaseSalary() + bonus;
+                if (!salaryManager.validateSalaryRules(p)) {
+                    continue;
+                }
+                double bonus = salaryManager.calculatePerformanceBonus(p, points);
+                double total = salaryManager.calculateMonthlySalary(p, points);
                 totalCost += total;
                 System.out.printf("%-6s %-22s %-16s %-14.0f %-12.0f %-14.0f%n",
                         p.getPlayerID(), p.getFullName(), p.getPlayerType(),
