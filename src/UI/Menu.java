@@ -6,6 +6,7 @@ import Manager.PlayerManager;
 import Manager.TrainingManager;
 import Manager.MatchManager;
 import Manager.ReportManager;
+import Manager.SalaryManager;
 
 public class Menu {
 
@@ -15,7 +16,8 @@ public class Menu {
     private final PlayerManager playerManager = new PlayerManager(sc);
     private final TrainingManager trainingManager = new TrainingManager(sc);
     private final MatchManager matchManager = new MatchManager(sc);
-    private final ReportManager reportManager = new ReportManager(playerManager, matchManager, sc);
+    private final SalaryManager salaryManager = new SalaryManager();
+    private final ReportManager reportManager = new ReportManager(playerManager, matchManager, salaryManager, sc);
 
     public void displayMenu() {
         int choice;
