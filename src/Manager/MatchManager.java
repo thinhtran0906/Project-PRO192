@@ -1,5 +1,6 @@
 package Manager;
 
+import Entities.MatchRecord;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;

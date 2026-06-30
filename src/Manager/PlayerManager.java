@@ -36,8 +36,6 @@ public class PlayerManager {
                 p = new RegularPlayer();
             } else if (type == 2) {
                 StarPlayer sp = new StarPlayer();
-                System.out.print("Enter Bonus: ");
-                sp.setBonus(Validator.parseDouble(sc.nextLine(), "Bonus"));
                 p = sp;
             } else {
                 System.out.println("Invalid player type!");

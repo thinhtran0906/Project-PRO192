@@ -2,19 +2,9 @@ package Entities;
 
 public class StarPlayer extends Player {
 
-    private double bonus;
-
-    public double getBonus() {
-        return bonus;
-    }
-
-    public void setBonus(double bonus) {
-        this.bonus = bonus;
-    }
-
     @Override
     public double calculateSalary() {
-        return getBaseSalary() + bonus;
+        return getBaseSalary();
     }
 
     // BR26: Star Player bonus = Monthly Performance Points x 500,000 VND.
