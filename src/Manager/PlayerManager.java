@@ -7,6 +7,7 @@ import Entities.RegularPlayer;
 import Entities.StarPlayer;
 import Exceptions.InvalidInputException;
 import Utils.Validator;
+import Utils.FileManager;
 
 public class PlayerManager {
 
@@ -15,7 +16,7 @@ public class PlayerManager {
 
     public PlayerManager(Scanner sc) {
         this.sc = sc;
-        playerList = new ArrayList<>();
+        playerList = FileManager.loadPlayersFromFile("players.txt");
     }
 
     public ArrayList<Player> getPlayerList() {
@@ -70,6 +71,7 @@ public class PlayerManager {
             p.setStatus("Active");
 
             playerList.add(p);
+            savePlayers();
             System.out.println("Player added successfully.");
         } catch (InvalidInputException e) {
             System.out.println("Error: " + e.getMessage());
@@ -138,6 +140,7 @@ public class PlayerManager {
             }
             p.setStatus(status.equalsIgnoreCase("Active") ? "Active" : "Inactive");
 
+            savePlayers();
             System.out.println("Player updated successfully.");
         } catch (InvalidInputException e) {
             System.out.println("Error: " + e.getMessage());
@@ -151,10 +154,19 @@ public class PlayerManager {
         Player p = searchPlayerByID(id);
         if (p != null) {
             p.setStatus("Inactive");
+            savePlayers();
             System.out.println("Player deactivated successfully!");
         } else {
             System.out.println("Player not found!");
         }
+    }
+
+    public void savePlayers() {
+        FileManager.savePlayersToFile(playerList, "players.txt");
+    }
+
+    public void loadPlayers() {
+        playerList = FileManager.loadPlayersFromFile("players.txt");
     }
 
     // BR6: is this shirt number already used by another ACTIVE player?
