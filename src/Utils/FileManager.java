@@ -10,6 +10,10 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import Entities.TrainingSession;
+import java.time.LocalDate;
+import Entities.MatchRecord;
+import Entities.PerformanceRecord;
 
 public class FileManager {
 
@@ -98,4 +102,176 @@ public class FileManager {
         
         return playerList;
     }
+
+    public static void saveTrainingToFile(ArrayList<TrainingSession> trainingList, String filename) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+
+            for (TrainingSession t : trainingList) {
+                pw.println(
+                        t.getTrainingID() + "," +
+                        t.getDate() + "," +
+                        t.getLocation() + "," +
+                        t.getTopic());
+            }
+
+            System.out.println("Training data successfully saved.");
+
+        } catch (IOException e) {
+            System.out.println("Error saving training: " + e.getMessage());
+        }
+    }
+    public static ArrayList<TrainingSession> loadTrainingFromFile(String filename) {
+
+    ArrayList<TrainingSession> trainingList = new ArrayList<>();
+    File file = new File(filename);
+
+    if (!file.exists()) {
+        return trainingList;
+    }
+
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+
+            String[] data = line.split(",");
+
+            if (data.length == 4) {
+
+                String id = data[0].trim();
+                LocalDate date = LocalDate.parse(data[1].trim());
+                String location = data[2].trim();
+                String topic = data[3].trim();
+
+                trainingList.add(
+                        new TrainingSession(id, date, location, topic)
+                );
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error loading training: " + e.getMessage());
+    }
+
+    return trainingList;
 }
+    public static void saveMatchToFile(ArrayList<MatchRecord> matchList, String filename) {
+
+    try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+
+        for (MatchRecord m : matchList) {
+
+            pw.println(
+                    m.getMatchID() + "," +
+                    m.getDate() + "," +
+                    m.getOpponent() + "," +
+                    m.getMatchType());
+
+        }
+
+        System.out.println("Match data successfully saved.");
+
+    } catch (IOException e) {
+        System.out.println("Error saving match: " + e.getMessage());
+    }
+}
+    public static ArrayList<MatchRecord> loadMatchFromFile(String filename) {
+
+    ArrayList<MatchRecord> matchList = new ArrayList<>();
+    File file = new File(filename);
+
+    if (!file.exists()) {
+        return matchList;
+    }
+
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+
+            String[] data = line.split(",");
+
+            if (data.length == 4) {
+
+                String id = data[0].trim();
+                LocalDate date = LocalDate.parse(data[1].trim());
+                String opponent = data[2].trim();
+                String type = data[3].trim();
+
+                matchList.add(
+                        new MatchRecord(id, date, opponent, type)
+                );
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error loading match: " + e.getMessage());
+    }
+
+    return matchList;
+}
+    public static void savePerformanceToFile(ArrayList<PerformanceRecord> performanceList, String filename) {
+
+    try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+
+        for (PerformanceRecord p : performanceList) {
+
+            pw.println(
+                    p.getMatchID() + "," +
+                    p.getPlayerID() + "," +
+                    p.getGoals() + "," +
+                    p.getAssists() + "," +
+                    p.getYellowCards() + "," +
+                    p.getRedCards() + "," +
+                    p.getMinutesPlayed());
+
+        }
+
+    } catch (IOException e) {
+        System.out.println("Error saving performance: " + e.getMessage());
+    }
+}
+    public static ArrayList<PerformanceRecord> loadPerformanceFromFile(String filename) {
+
+    ArrayList<PerformanceRecord> performanceList = new ArrayList<>();
+
+    File file = new File(filename);
+
+    if (!file.exists()) {
+        return performanceList;
+    }
+
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+
+            String[] data = line.split(",");
+
+            if (data.length == 7) {
+
+                performanceList.add(
+                        new PerformanceRecord(
+                                data[0].trim(),
+                                data[1].trim(),
+                                Integer.parseInt(data[2].trim()),
+                                Integer.parseInt(data[3].trim()),
+                                Integer.parseInt(data[4].trim()),
+                                Integer.parseInt(data[5].trim()),
+                                Integer.parseInt(data[6].trim())
+                        ));
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println("Error loading performance: " + e.getMessage());
+    }
+
+    return performanceList;
+}
+}
+
+    

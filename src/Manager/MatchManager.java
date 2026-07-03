@@ -8,6 +8,7 @@ import Entities.Player;
 import Entities.PerformanceRecord;
 import Exceptions.InvalidInputException;
 import Utils.Validator;
+import Utils.FileManager;
 
 public class MatchManager {
 
@@ -17,10 +18,15 @@ public class MatchManager {
 
     public MatchManager(Scanner sc) {
         this.sc = sc;
-        matchList = new ArrayList<>();
-        performanceList = new ArrayList<>();
+        matchList = FileManager.loadMatchFromFile("match.txt");
+        performanceList = FileManager.loadPerformanceFromFile("performance.txt");
     }
-
+    public void saveMatch() {
+    FileManager.saveMatchToFile(matchList, "match.txt");
+}
+    public void savePerformance() {
+    FileManager.savePerformanceToFile(performanceList, "performance.txt");
+}
     public MatchRecord searchMatchByID(String id) {
         for (MatchRecord m : matchList) {
             if (m.getMatchID().equalsIgnoreCase(id)) {
@@ -58,6 +64,7 @@ public class MatchManager {
             }
 
             matchList.add(new MatchRecord(id, date, opponent, type));
+            saveMatch();
             System.out.println("Match record created successfully.");
         } catch (InvalidInputException e) {
             System.out.println("Error: " + e.getMessage());
@@ -148,6 +155,7 @@ public class MatchManager {
                 existing = new PerformanceRecord(matchID, playerID, goals, assists, yellow, red, minutes);
                 performanceList.add(existing);
             }
+            savePerformance();
             System.out.println("Player performance saved successfully.");
             System.out.println("Performance Points: " + existing.calculatePerformancePoints());
         } catch (InvalidInputException e) {
