@@ -89,38 +89,66 @@ public class TrainingManager {
 
     TrainingSession training = searchById(id);
 
-    if (training == null) {
+       if (training == null) {
         System.out.println("Training not found!");
         return;
     }
+    ArrayList<Player> activePlayers = pm.getActivePlayers();
+
+    System.out.println("Training ID: " + training.getTrainingID());
+    System.out.println("Date: " + training.getDate());
+    System.out.println("Total Active Players: " + activePlayers.size());
+
     System.out.println("Active Players:");
 
-    for (Player p : pm.getPlayerList()) {
-        if (p.getStatus().equalsIgnoreCase("Active")) {
-            System.out.println(p.getPlayerID() + " - " + p.getFullName());
-        }
-    }
+    for (Player p : activePlayers) {
+    System.out.println(p.getPlayerID() + " - " + p.getFullName());
+}
     System.out.println("Enter absent Player IDs (separated by commas).");
     System.out.println("Leave blank if everyone is present.");
     System.out.print("Absent Player IDs: ");
 
     String input = sc.nextLine().trim();
-
     String[] absentIDs;
 
-    if (input.isEmpty()) {
-        absentIDs = new String[0];
-    } else {
-        absentIDs = input.split(",");
+if (input.isEmpty()) {
+    absentIDs = new String[0];
+} else {
+    absentIDs = input.split(",");
+}
+    for (String idAbsent : absentIDs) {
+
+    boolean found = false;
+
+    for (Player p : activePlayers) {
+
+        if (p.getPlayerID().equalsIgnoreCase(idAbsent.trim())) {
+            found = true;
+            break;
+        }
     }
+
+    if (!found) {
+        System.out.println("Player ID " + idAbsent + " is invalid!");
+        return;
+    }
+}
+    for (int i = 0; i < absentIDs.length; i++) {
+
+    for (int j = i + 1; j < absentIDs.length; j++) {
+
+        if (absentIDs[i].trim().equalsIgnoreCase(absentIDs[j].trim())) {
+
+            System.out.println("Duplicate Player ID!");
+
+            return;
+        }
+    }
+}
 
     int present = 0;
     int absent = 0;
-    for (Player player : pm.getPlayerList()) {
-
-        if (!player.getStatus().equalsIgnoreCase("Active")) {
-            continue;
-        }
+    for (Player player : activePlayers) {
 
         String status = "Present";
 
@@ -155,7 +183,11 @@ public class TrainingManager {
     }
 
     System.out.println("Training attendance recorded successfully.");
+
+    System.out.println("Summary:");
+
     System.out.println("Present: " + present);
+
     System.out.println("Absent: " + absent);
 }
     }
