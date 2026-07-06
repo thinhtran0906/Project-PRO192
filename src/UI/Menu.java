@@ -118,7 +118,7 @@ public class Menu {
                     
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice != );
+        } while (choice != 4);
     }
 
     private void searchPlayer() {
