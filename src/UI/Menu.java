@@ -96,19 +96,29 @@ public class Menu {
         int choice;
         do {
             System.out.println("\n----- REPORTS -----");
-            System.out.println("1. Salary Summary Report");
-            System.out.println("2. All-time Top Goal Scorers");
-            System.out.println("3. Back");
+            System.out.println("1. Calculate Player Salary");
+            System.out.println("2. Salary Summary Report");
+            System.out.println("3. All-time Top Goal Scorers");
+            System.out.println("4. Back");
             System.out.print("Choose an option: ");
 
             choice = readInt();
             switch (choice) {
-                case 1: reportManager.salarySummaryReport(); break;
-                case 2: reportManager.topGoalScorersReport(); break;
-                case 3: break;
+                case 1: 
+                    salaryManager.calculatePlayerSalary(playerManager, matchManager, sc);
+                    break;
+                case 2: 
+                    reportManager.salarySummaryReport();
+                    break;
+                case 3:
+                    reportManager.topGoalScorersReport();
+                    break;
+                case 4:
+                    break;
+                    
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice != 3);
+        } while (choice != );
     }
 
     private void searchPlayer() {
