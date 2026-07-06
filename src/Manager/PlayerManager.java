@@ -22,7 +22,17 @@ public class PlayerManager {
     public ArrayList<Player> getPlayerList() {
         return playerList;
     }
+public ArrayList<Player> getActivePlayers() {
+    ArrayList<Player> activePlayers = new ArrayList<>();
 
+    for (Player p : playerList) {
+        if (p.getStatus().equalsIgnoreCase("Active")) {
+            activePlayers.add(p);
+        }
+    }
+
+    return activePlayers;
+}
     // FR1 / BR1-6, BR11: add a new player
     public void addPlayer() {
         try {

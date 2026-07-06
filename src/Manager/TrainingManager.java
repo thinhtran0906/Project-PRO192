@@ -96,7 +96,9 @@ public class TrainingManager {
     ArrayList<Player> activePlayers = pm.getActivePlayers();
 
     System.out.println("Training ID: " + training.getTrainingID());
-    System.out.println("Date: " + training.getDate());
+    System.out.println("Date: " +
+    training.getDate().format(
+        java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     System.out.println("Total Active Players: " + activePlayers.size());
 
     System.out.println("Active Players:");
