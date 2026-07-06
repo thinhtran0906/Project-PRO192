@@ -245,4 +245,33 @@ public class PlayerManager {
         }
         System.out.println();
     }
+    
+    // FR5 (Task S5): View Player Details based on Player ID
+    public void viewPlayerDetails() {
+        System.out.print("Enter Player ID to view details: ");
+        String id = sc.nextLine().trim();
+        
+        // Tận dụng lại hàm tìm kiếm ID nội bộ của em
+        Player p = searchPlayerByID(id); 
+        
+        if (p == null) {
+            System.out.println("Player with ID '" + id + "' not found in the system!");
+            return;
+        }
+
+        // IN RA MỘT CÁI PROFILE CARD DẠNG DỌC SIÊU ĐẸP VÀ CHUYÊN NGHIỆP
+        System.out.println("\n===============================================");
+        System.out.println("               PLAYER DETAILS             ");
+        System.out.println("===============================================");
+        System.out.printf("  Player ID:    %s%n", p.getPlayerID());
+        System.out.printf("  Full Name:    %s%n", p.getFullName());
+        System.out.printf("  Player Type:  %s%n", p.getPlayerType()); // Đa hình lấy nhãn Regular/Star
+        System.out.printf("  Age:          %d years old%n", p.getAge());
+        System.out.printf("  Nationality: %s%n", p.getNationality());
+        System.out.printf("  Position:    %s%n", p.getPosition());
+        System.out.printf("  Shirt Number: %d%n", p.getShirtNumber());
+        System.out.printf("  Base Salary:  %,.2f VND%n", p.getBaseSalary());
+        System.out.printf("  Status:       %s%n", p.getStatus());
+        System.out.println("===============================================");
+    }
 }

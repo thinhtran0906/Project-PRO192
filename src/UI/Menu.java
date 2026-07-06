@@ -49,9 +49,10 @@ public class Menu {
             System.out.println("1. Add Player");
             System.out.println("2. View All Players");
             System.out.println("3. Search Player by ID");
-            System.out.println("4. Update Player");
-            System.out.println("5. Deactivate Player");
-            System.out.println("6. Back");
+            System.out.println("4. View Player Details");
+            System.out.println("5. Update Player");
+            System.out.println("6. Deactivate Player");
+            System.out.println("7. Back");
             System.out.print("Choose an option: ");
 
             choice = readInt();
@@ -59,9 +60,10 @@ public class Menu {
                 case 1: playerManager.addPlayer(); break;
                 case 2: playerManager.displayPlayers(); break;
                 case 3: searchPlayer(); break;
-                case 4: playerManager.updatePlayer(); break;
-                case 5: playerManager.deactivatePlayer(); break;
-                case 6: break;
+                case 4: viewPlayerDetails(); break;
+                case 5: playerManager.updatePlayer(); break;
+                case 6: playerManager.deactivatePlayer(); break;
+                case 7: break;
                 default: System.out.println("Invalid choice!");
             }
         } while (choice != 6);
@@ -140,5 +142,9 @@ public class Menu {
             System.out.println("Please enter a number!");
             return -1;
         }
+    }
+    
+    private void viewPlayerDetails() {
+        playerManager.viewPlayerDetails();
     }
 }
