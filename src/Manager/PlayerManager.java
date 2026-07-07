@@ -113,6 +113,25 @@ public ArrayList<Player> getActivePlayers() {
         }
         return null;
     }
+    
+    public void SearchPlayer() {
+        System.out.print("Enter Player ID to search: ");
+        String id = sc.nextLine().trim();
+        
+        Player player = searchPlayerByID(id); // Tái sử dụng hàm tìm kiếm nội bộ
+        
+        if (player != null) {
+            // In kết quả hàng ngang theo định dạng format có sẵn của em
+            System.out.println("\n---------------------------------------- SEARCH RESULT ----------------------------------------");
+            System.out.printf("| %-8s | %-22s | %-3s | %-12s | %-4s | %-3s | %-12s | %-10s |%n",
+                    "ID", "Name", "Age", "Nationality", "Pos", "Num", "Salary", "Status");
+            printLine(); 
+            System.out.println(player); // Đa hình gọi toString() tự động
+            printLine();
+        } else {
+            System.out.println("Player not found with ID: " + id);
+        }
+    }
 
     // FR2: update position, shirt number, base salary, status (type cannot change)
     public void updatePlayer() {

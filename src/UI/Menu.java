@@ -61,8 +61,8 @@ public class Menu {
             switch (choice) {
                 case 1: playerManager.addPlayer(); break;
                 case 2: playerManager.displayPlayers(); break;
-                case 3: searchPlayer(); break;
-                case 4: viewPlayerDetails(); break;
+                case 3: playerManager.SearchPlayer(); break;
+                case 4: playerManager.viewPlayerDetails(); break;
                 case 5: playerManager.updatePlayer(); break;
                 case 6: playerManager.deactivatePlayer(); break;
                 case 7: break;
@@ -95,8 +95,6 @@ public class Menu {
             }
         } while (choice != 6);
     }
-
-
 
     private void salaryMenu() {
         int choice;
@@ -144,17 +142,6 @@ public class Menu {
         } while (choice != 3 );
     }
 
-    private void searchPlayer() {
-        System.out.print("Enter Player ID: ");
-        String id = sc.nextLine().trim();
-        Player player = playerManager.searchPlayerByID(id);
-        if (player != null) {
-            System.out.println(player);
-        } else {
-            System.out.println("Player not found!");
-        }
-    }
-
     // Reads a menu option without crashing on non-numeric input.
     private int readInt() {
         try {
@@ -163,9 +150,5 @@ public class Menu {
             System.out.println("Please enter a number!");
             return -1;
         }
-    }
-    
-    private void viewPlayerDetails() {
-        playerManager.viewPlayerDetails();
     }
 }
