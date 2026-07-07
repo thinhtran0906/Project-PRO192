@@ -19,7 +19,7 @@ public class TrainingManager {
    public TrainingManager(Scanner sc) {
     this.sc = sc;
     trainingList = FileManager.loadTrainingFromFile("training.txt");
-    attendanceList = new ArrayList<>();
+    attendanceList = FileManager.loadAttendanceFromFile("attendance.txt");
 }
     public void saveTraining() {
     FileManager.saveTrainingToFile(trainingList, "training.txt");
@@ -94,7 +94,13 @@ public class TrainingManager {
         return;
     }
     ArrayList<Player> activePlayers = pm.getActivePlayers();
+    if (training.getPlayerSnapshot().isEmpty()) {
 
+    for (Player p : activePlayers) {
+        training.getPlayerSnapshot().add(p.getPlayerID());
+    }
+
+}
     System.out.println("Training ID: " + training.getTrainingID());
     System.out.println("Date: " +
     training.getDate().format(
@@ -147,10 +153,30 @@ if (input.isEmpty()) {
         }
     }
 }
+            System.out.println("[1] Submit Attendance");
+            System.out.println("[2] Cancel");
+            System.out.print("Choose an option: ");
 
+    int choice = Integer.parseInt(sc.nextLine());
+
+        if (choice == 2) {
+            System.out.println("Cancelled.");
+            return;
+}
+
+        if (choice != 1) {
+            System.out.println("Invalid choice!");
+            return;
+}
     int present = 0;
     int absent = 0;
-    for (Player player : activePlayers) {
+    for (String playerID : training.getPlayerSnapshot()) {
+
+    Player player = pm.searchPlayerByID(playerID);
+
+    if (player == null) {
+        continue;
+    }
 
         String status = "Present";
 
@@ -171,11 +197,15 @@ if (input.isEmpty()) {
                 training.getTrainingID(),
                 player.getPlayerID());
 
-             if (old != null) {
-        attendanceList.remove(old);
-}
+            if (old != null) {
 
-        attendanceList.add(attendance);
+                old.setAttendanceStatus(status);
+
+ } else {
+
+    attendanceList.add(attendance);
+
+}
 
              if (status.equals("Present")) {
             present++;
@@ -185,6 +215,10 @@ if (input.isEmpty()) {
     }
 
     System.out.println("Training attendance recorded successfully.");
+    
+    FileManager.saveAttendanceToFile(attendanceList, "attendance.txt");
+    
+    saveTraining();
 
     System.out.println("Summary:");
 

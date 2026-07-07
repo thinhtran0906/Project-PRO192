@@ -77,20 +77,22 @@ public class Menu {
             System.out.println("\n----- TRAINING AND MATCH MANAGEMENT -----");
             System.out.println("1. Create Training Session");
             System.out.println("2. View Training History");
-            System.out.println("3. Create Match Record");
-            System.out.println("4. View Match History");
-            System.out.println("5. Add / Update Player Performance");
-            System.out.println("6. Back");
+            System.out.println("3. Record Training Attendance");
+            System.out.println("4. Create Match Record");
+            System.out.println("5. View Match History");
+            System.out.println("6. Add / Update Player Performance");
+            System.out.println("7. Back");
             System.out.print("Choose an option: ");
 
             choice = readInt();
             switch (choice) {
                 case 1: trainingManager.createTrainingSession(); break;
-                case 2: trainingManager.displayTrainingHistory(); break;
-                case 3: matchManager.createMatch(); break;
-                case 4: matchManager.viewMatchHistory(); break;
-                case 5: matchManager.addOrUpdatePerformance(playerManager); break;
-                case 6: break;
+                case 2:trainingManager.recordAttendance(playerManager); break;
+                case 3: trainingManager.displayTrainingHistory(); break;
+                case 4: matchManager.createMatch(); break;
+                case 5: matchManager.viewMatchHistory(); break;
+                case 6: matchManager.addOrUpdatePerformance(playerManager); break;
+                case 7: break;
                 default: System.out.println("Invalid choice!");
             }
         } while (choice != 6);

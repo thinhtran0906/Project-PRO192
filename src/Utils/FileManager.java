@@ -14,6 +14,7 @@ import Entities.TrainingSession;
 import java.time.LocalDate;
 import Entities.MatchRecord;
 import Entities.PerformanceRecord;
+import Entities.AttendanceRecord;
 
 public class FileManager {
 
@@ -107,11 +108,12 @@ public class FileManager {
         try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
 
             for (TrainingSession t : trainingList) {
-                pw.println(
-                        t.getTrainingID() + "," +
-                        t.getDate() + "," +
-                        t.getLocation() + "," +
-                        t.getTopic());
+               pw.println(
+                    t.getTrainingID() + "," +
+                    t.getDate() + "," +
+                    t.getLocation() + "," +
+                    t.getTopic() + "," +
+                    String.join(";", t.getPlayerSnapshot()));
             }
 
             System.out.println("Training data successfully saved.");
@@ -137,16 +139,32 @@ public class FileManager {
 
             String[] data = line.split(",");
 
-            if (data.length == 4) {
+            if (data.length >= 4) {
 
                 String id = data[0].trim();
                 LocalDate date = LocalDate.parse(data[1].trim());
                 String location = data[2].trim();
                 String topic = data[3].trim();
+    TrainingSession training =
+            new TrainingSession(id, date, location, topic);
+            if (data.length == 5) {
 
-                trainingList.add(
-                        new TrainingSession(id, date, location, topic)
-                );
+        ArrayList<String> snapshot = new ArrayList<>();
+
+            if (!data[4].trim().isEmpty()) {
+
+            String[] ids = data[4].split(";");
+
+            for (String s : ids) {
+                snapshot.add(s.trim());
+            }
+        }
+
+        training.setPlayerSnapshot(snapshot);
+    }
+
+
+                trainingList.add(training);
             }
         }
 
@@ -271,6 +289,69 @@ public class FileManager {
     }
 
     return performanceList;
+}
+    public static void saveAttendanceToFile(ArrayList<AttendanceRecord> attendanceList, String filename) {
+
+    try (PrintWriter pw = new PrintWriter(new FileWriter(filename))) {
+
+        for (AttendanceRecord a : attendanceList) {
+
+            pw.println(
+                    a.getAttendanceID() + "," +
+                    a.getPlayerID() + "," +
+                    a.getTrainingID() + "," +
+                    a.getAttendanceStatus());
+
+        }
+
+        System.out.println("Attendance data successfully saved.");
+
+    } catch (IOException e) {
+        System.out.println("Error saving attendance: " + e.getMessage());
+    }
+}
+    public static ArrayList<AttendanceRecord> loadAttendanceFromFile(String filename) {
+
+    ArrayList<AttendanceRecord> attendanceList = new ArrayList<>();
+
+    File file = new File(filename);
+
+    if (!file.exists()) {
+        return attendanceList;
+    }
+
+    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+
+            String[] data = line.split(",");
+
+            if (data.length == 4) {
+
+                attendanceList.add(
+
+                        new AttendanceRecord(
+
+                                data[0].trim(),
+                                data[1].trim(),
+                                data[2].trim(),
+                                data[3].trim()
+                        )
+                );
+
+            }
+
+        }
+
+    } catch (Exception e) {
+
+        System.out.println("Error loading attendance: " + e.getMessage());
+
+    }
+
+    return attendanceList;
 }
 }
 

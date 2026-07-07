@@ -2,6 +2,7 @@ package Entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class TrainingSession {
 
@@ -9,6 +10,7 @@ public class TrainingSession {
     private LocalDate date;
     private String location;
     private String topic;
+    private ArrayList<String> playerSnapshot = new ArrayList<>();
 
     public TrainingSession(String trainingID, LocalDate date, String location, String topic) {
         this.trainingID = trainingID;
@@ -21,7 +23,13 @@ public class TrainingSession {
     public LocalDate getDate() { return date; }
     public String getLocation() { return location; }
     public String getTopic() { return topic; }
+    public ArrayList<String> getPlayerSnapshot() {
+        return playerSnapshot;
+}
 
+    public void setPlayerSnapshot(ArrayList<String> playerSnapshot) {
+        this.playerSnapshot = playerSnapshot;
+}
     @Override
     public String toString() {
         return String.format("%-6s %-12s %-22s %s",
