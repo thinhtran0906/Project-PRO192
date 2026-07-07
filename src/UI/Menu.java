@@ -29,7 +29,7 @@ public class Menu {
             System.out.println("2. Training and Match Management");
             System.out.println("3. Salary Management");
             System.out.println("4. Reports");
-            System.out.println(". Exit");
+            System.out.println("5. Exit");
             System.out.print("Choose an option: ");
 
             choice = readInt();
@@ -38,10 +38,10 @@ public class Menu {
                 case 2: trainingAndMatchMenu(); break;
                 case 3: salaryMenu(); break;
                 case 4: reportsMenu(); break;
-                case : System.out.println("Thank you for using the Football Player Management System."); break;
+                case 5 : System.out.println("Thank you for using the Football Player Management System."); break;
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice !=5  );
+        } while (choice != 5  );
     }
 
     private void managePlayersMenu() {
@@ -68,7 +68,7 @@ public class Menu {
                 case 7: break;
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice != 6);
+        } while (choice != );
     }
 
     private void trainingAndMatchMenu() {
