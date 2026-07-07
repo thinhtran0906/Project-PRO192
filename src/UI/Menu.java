@@ -27,19 +27,21 @@ public class Menu {
             System.out.println("======================================");
             System.out.println("1. Manage Players");
             System.out.println("2. Training and Match Management");
-            System.out.println("3. Reports");
-            System.out.println("4. Exit");
+            System.out.println("3. Salary Management");
+            System.out.println("4. Reports");
+            System.out.println(". Exit");
             System.out.print("Choose an option: ");
 
             choice = readInt();
             switch (choice) {
                 case 1: managePlayersMenu(); break;
                 case 2: trainingAndMatchMenu(); break;
-                case 3: reportsMenu(); break;
-                case 4: System.out.println("Thank you for using the Football Player Management System."); break;
+                case 3: salaryMenu(); break;
+                case 4: reportsMenu(); break;
+                case : System.out.println("Thank you for using the Football Player Management System."); break;
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice != 4);
+        } while (choice !=5  );
     }
 
     private void managePlayersMenu() {
@@ -94,33 +96,52 @@ public class Menu {
         } while (choice != 6);
     }
 
+
+
+    private void salaryMenu() {
+        int choice;
+        do {
+            System.out.println("\n----- SALARY MANAGEMENT -----");
+            System.out.println("1. Calculate Player Salary");
+            System.out.println("2. Back");
+            System.out.print("Choose an option: ");
+
+           choice = readInt();
+
+           switch (choice) {
+               case 1:
+                   salaryManager.calculatePlayerSalary(playerManager, matchManager, sc);
+                   break;
+               case 2:
+                   break;
+               default:
+                   System.out.println("Invalid choice!");
+           }
+       } while (choice != 2);
+    }
     private void reportsMenu() {
         int choice;
         do {
             System.out.println("\n----- REPORTS -----");
-            System.out.println("1. Calculate Player Salary");
-            System.out.println("2. Salary Summary Report");
-            System.out.println("3. All-time Top Goal Scorers");
-            System.out.println("4. Back");
+            System.out.println("1. Salary Summary Report");
+            System.out.println("2. All-time Top Goal Scorers");
+            System.out.println("3. Back");
             System.out.print("Choose an option: ");
 
             choice = readInt();
             switch (choice) {
                 case 1: 
-                    salaryManager.calculatePlayerSalary(playerManager, matchManager, sc);
-                    break;
-                case 2: 
                     reportManager.salarySummaryReport();
                     break;
-                case 3:
+                case 2:
                     reportManager.topGoalScorersReport();
                     break;
-                case 4:
+                case 3:
                     break;
                     
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice != 4);
+        } while (choice != 3 );
     }
 
     private void searchPlayer() {
