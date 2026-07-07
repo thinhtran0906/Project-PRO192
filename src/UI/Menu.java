@@ -68,7 +68,7 @@ public class Menu {
                 case 7: break;
                 default: System.out.println("Invalid choice!");
             }
-        } while (choice != );
+        } while (choice != 7 );
     }
 
     private void trainingAndMatchMenu() {
